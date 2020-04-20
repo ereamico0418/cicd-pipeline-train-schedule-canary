@@ -1,6 +1,7 @@
 pipeline {
     agent any
-    environment 
+    environment {
+        //be sure to change with own Docker Hub username
         DOCKER_IMAGE_NAME = "ereamico4/train-schedule"
     }
     stages {
