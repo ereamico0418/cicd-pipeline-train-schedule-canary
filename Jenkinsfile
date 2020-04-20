@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "ereamico0418/train-schedule"
+        DOCKER_IMAGE_NAME = "ereamico4/train-schedule"
     }
     stages {
         stage('Build') {
