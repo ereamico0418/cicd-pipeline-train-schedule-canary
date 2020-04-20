@@ -1,7 +1,6 @@
 pipeline {
     agent any
-    environment {
-        //be sure to replace "willbla" with your own Docker Hub username
+    environment 
         DOCKER_IMAGE_NAME = "ereamico4/train-schedule"
     }
     stages {
@@ -23,6 +22,21 @@ pipeline {
                         sh 'echo Hello, World!'
                     }
                 }
+            }
+        }
+        stage ('CanaryDeploy') {
+           when {
+                branch 'master'
+            }
+            environment {
+                CANARY_REPLICAS = 1
+            }
+            steps {
+                kubernetesDeploy(
+                    kubeconfigId: 'kubeconfig',
+                    configs: 'train-schedule-kube-canary.yml',
+                    enableConfigSubstitution: true
+                )
             }
         }
         stage('Push Docker Image') {
